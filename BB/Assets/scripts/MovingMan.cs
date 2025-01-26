@@ -13,7 +13,7 @@ public class MovingMan : MonoBehaviour
     private Vector2 movement;
     private Rigidbody2D rb; 
     private bool isGrounded; 
-    private int score = 0;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -66,28 +66,5 @@ public class MovingMan : MonoBehaviour
 
         return false;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Check if the player touches a coin
-        if (collision.gameObject.CompareTag("fruits"))
-        {
-            // Destroy the coin
-            Destroy(collision.gameObject);
-
-            // Increase the score
-            score += 1;
-
-            // Update the score display
-            UpdateScore();
-        }
-    }
-
-    private void UpdateScore()
-    {
-        // Update the UI text with the current score
-        if (scoreText != null)
-        {
-            scoreText.text = "Score: " + score;
-        }
-    }
+    
 }
