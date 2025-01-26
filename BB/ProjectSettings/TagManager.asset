@@ -6,6 +6,7 @@ TagManager:
   tags:
   - spikes
   - fruits
+  - Wooden Box
   layers:
   - Default
   - TransparentFX

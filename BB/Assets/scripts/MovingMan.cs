@@ -2,52 +2,92 @@ using UnityEngine;
 
 public class MovingMan : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Player movement speed
-    public float jumpForce = 5f; // Force applied for jumping
-    public Transform groundCheck; // Reference to the ground check position
-    public LayerMask groundLayer; // Layer mask to determine what is considered ground
-    public string horizontalInput = "Horizontal"; // Horizontal input axis
-    public string jumpInput = "Jump"; // Jump input axis
-    private Rigidbody2D rb;
+    public float moveSpeed = 5f; 
+    public float jumpForce = 5f;
+    public Transform groundCheck; 
+    public float groundCheckRadius = 0.1f; 
+    public LayerMask groundLayer; 
+    public string horizontalInput = "Horizontal"; 
+    public string jumpInput = "Jump"; 
+    public TMPro.TextMeshProUGUI scoreText;
     private Vector2 movement;
-    private bool isGrounded;
-
+    private Rigidbody2D rb; 
+    private bool isGrounded; 
+    private int score = 0;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 3; // Adjust this value to control fall speed
+        if (rb == null)
+        {
+            Debug.LogError("Rigidbody2D is missing on the player!");
+        }
+
+        rb.gravityScale = 3; 
     }
 
     void Update()
     {
-        // Horizontal movement
+        
         movement.x = Input.GetAxis(horizontalInput);
 
-        // Check if the player is grounded
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
-        Debug.Log("IsGrounded: " + isGrounded); // Log for verification
+        
+        isGrounded = IsGrounded();
 
         // Handle jumping
         if (Input.GetButtonDown(jumpInput) && isGrounded)
         {
-            Debug.Log("Jump button pressed and player is grounded"); // Log for jump detection
-            rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse); // Use AddForce for jumping
+            Jump();
         }
     }
 
     void FixedUpdate()
     {
         // Apply horizontal movement
-        rb.linearVelocity = new Vector2(movement.x * moveSpeed, rb.linearVelocity.y); // Use velocity for consistent movement
+        rb.linearVelocity = new Vector2(movement.x * moveSpeed, rb.linearVelocity.y);
     }
 
-    void OnDrawGizmos()
+    private void Jump()
     {
-        // Draw the ground check circle
-        if (groundCheck != null)
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); // Set vertical velocity directly
+    }
+
+    private bool IsGrounded()
+    {
+        // Check if the player is touching the ground layer
+        Collider2D groundCollider = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        // Check if the player is standing on an object tagged "Wooden Box"
+        Collider2D boxCollider = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius);
+
+        if (groundCollider != null || (boxCollider != null && boxCollider.CompareTag("Wooden Box")))
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, 0.1f);
+            return true;
+        }
+
+        return false;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Check if the player touches a coin
+        if (collision.gameObject.CompareTag("fruits"))
+        {
+            // Destroy the coin
+            Destroy(collision.gameObject);
+
+            // Increase the score
+            score += 1;
+
+            // Update the score display
+            UpdateScore();
+        }
+    }
+
+    private void UpdateScore()
+    {
+        // Update the UI text with the current score
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + score;
         }
     }
 }
