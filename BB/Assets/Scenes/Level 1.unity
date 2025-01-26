@@ -3229,6 +3229,7 @@ MonoBehaviour:
     m_Bits: 8
   horizontalInput: Horizontal2
   jumpInput: Jump2
+  levelname: 
 --- !u!70 &849896483
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3818,7 +3819,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 1719959728}
-  smoothSpeed: 0.125
 --- !u!1 &950247945
 GameObject:
   m_ObjectHideFlags: 0
@@ -9489,6 +9489,7 @@ MonoBehaviour:
     m_Bits: 8
   horizontalInput: Horizontal
   jumpInput: Jump
+  levelname: level2
 --- !u!70 &1192599638
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -9784,7 +9785,7 @@ Transform:
   m_GameObject: {fileID: 1419548377}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -30.940094, y: -6.12, z: 0}
+  m_LocalPosition: {x: -32.65, y: -6.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

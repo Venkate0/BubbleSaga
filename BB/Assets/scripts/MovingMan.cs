@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MovingMan : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class MovingMan : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
     private bool isGrounded;
+
+    public string levelname;
 
     void Start()
     {
@@ -40,6 +43,17 @@ public class MovingMan : MonoBehaviour
         // Apply horizontal movement
         rb.linearVelocity = new Vector2(movement.x * moveSpeed, rb.linearVelocity.y); // Use velocity for consistent movement
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("fruits"))
+        {
+            SceneManager.LoadScene(levelname);
+        }
+    }
+
+
+
 
     void OnDrawGizmos()
     {
