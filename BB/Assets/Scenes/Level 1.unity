@@ -8838,6 +8838,7 @@ GameObject:
   - component: {fileID: 1192599638}
   - component: {fileID: 1192599637}
   - component: {fileID: 1192599642}
+  - component: {fileID: 1192599643}
   m_Layer: 0
   m_Name: PlayerOne
   m_TagString: Player
@@ -9025,6 +9026,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1192599643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192599636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe9fb8ccd1c1914a9c1a98425f0a473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundMusic: {fileID: 8300000, guid: 395616160ec4d5248867aa7e21d7fc65, type: 3}
 --- !u!1 &1238447037
 GameObject:
   m_ObjectHideFlags: 0
